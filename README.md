@@ -2,7 +2,7 @@
 
 ---
 
-## 🤖 AI-POWERED EMAIL SUMMARIZER (Headline Feature)
+## 🤖 AI-POWERED EMAIL SUMMARIZER
 
 <div align="center">
 
