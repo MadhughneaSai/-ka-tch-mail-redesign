@@ -1,5 +1,47 @@
 # Ka-tch Mail - Email Service Case Study
 
+---
+
+## 🤖 AI-POWERED EMAIL SUMMARIZER (Headline Feature)
+
+<div align="center">
+
+### ✨ Powered by Google Gemini AI ✨
+
+</div>
+
+One of the standout features of this redesign is the **AI Email Summarizer** - an intelligent assistant that analyzes your entire inbox and generates comprehensive summaries with a single click.
+
+### How It Works:
+1. Click the **"🤖 AI Summarize"** button in the sidebar
+2. A beautiful modal appears asking if you want to summarize your emails
+3. Click **"Generate Summary"** and watch the AI analyze your inbox
+4. Receive a structured report with:
+   - 📊 **Overview** - Inbox status and key statistics
+   - 🔥 **Key Highlights** - Most important/urgent emails
+   - 📋 **Action Items** - Tasks extracted from emails
+   - 👥 **Key Contacts** - Main people and message context
+   - 💡 **Insights** - Patterns and observations
+
+### Technical Implementation:
+- **API**: Google Gemini 1.5 Flash
+- **Integration**: Client-side JavaScript with async/await
+- **UI**: Custom modal with loading states and formatted output
+- **Error Handling**: Toast notifications for failures
+
+```javascript
+// Example: AI Summary Request
+const response = await fetch(`${GEMINI_API_URL}?key=${API_KEY}`, {
+  method: 'POST',
+  body: JSON.stringify({
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: { temperature: 0.7, maxOutputTokens: 2048 }
+  })
+});
+```
+
+---
+
 ## 🎨 Design Inspiration & Credits
 
 The UI design for this project was inspired by the clean, modern aesthetics of:
@@ -194,13 +236,19 @@ frontend/
 
 ---
 
-## Screenshots
+## Screenshots & Features Gallery
 
 The redesigned frontend features:
+- 🤖 **AI Email Summarizer** - One-click inbox analysis powered by Gemini
 - 🌙 Dark theme with purple gradient accents
-- 📬 Card-based email list with avatars
-- ✨ Smooth animations and transitions
+- 📬 Card-based email list with dynamic avatars
+- ✨ Feature showcase transition screen after login
+- 🔐 Real-time password validation with visual checklist
 - 📱 Responsive design for all screen sizes
+- 🔔 Toast notifications for all actions
+- ⭐ Star/unstar emails with persistent storage
+- 🗑️ Delete emails with confirmation
+- 🔍 Search and filter functionality
 
 ---
 
