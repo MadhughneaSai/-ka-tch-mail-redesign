@@ -1,0 +1,2757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ka-tch Mail | Your Digital Postbox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --bg-card-hover: #22222e;
+      --accent-primary: #7c3aed;
+      --accent-secondary: #a855f7;
+      --accent-tertiary: #c084fc;
+      --accent-gold: #fbbf24;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border-color: #2a2a3a;
+      --success: #10b981;
+      --error: #ef4444;
+      --gradient-1: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #c084fc 100%);
+      --gradient-2: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+      --gradient-mesh: radial-gradient(at 40% 20%, hsla(268, 82%, 55%, 0.15) 0px, transparent 50%),
+                       radial-gradient(at 80% 0%, hsla(280, 65%, 45%, 0.1) 0px, transparent 50%),
+                       radial-gradient(at 0% 50%, hsla(268, 82%, 35%, 0.1) 0px, transparent 50%);
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.5);
+      --shadow-glow: 0 0 40px rgba(124, 58, 237, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      background-image: var(--gradient-mesh);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-primary);
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-weight: 400;
+    }
+
+    /* Utility Classes */
+    .hidden { display: none !important; }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .animate-fade { animation: fadeIn 0.5s ease-out forwards; }
+    .animate-slide { animation: slideIn 0.4s ease-out forwards; }
+
+    /* ============ FEATURE SHOWCASE SCREEN ============ */
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.3); }
+      50% { transform: scale(1.05); }
+      70% { transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    @keyframes progressBar {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+
+    @keyframes rotateIn {
+      from { opacity: 0; transform: rotate(-180deg) scale(0); }
+      to { opacity: 1; transform: rotate(0) scale(1); }
+    }
+
+    .feature-showcase {
+      min-height: 100vh;
+      background: var(--bg-primary);
+      background-image: 
+        radial-gradient(at 20% 30%, hsla(268, 82%, 55%, 0.2) 0px, transparent 50%),
+        radial-gradient(at 80% 70%, hsla(280, 65%, 45%, 0.15) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, hsla(268, 82%, 35%, 0.1) 0px, transparent 50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .showcase-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+    .particle:nth-child(2) { left: 20%; top: 80%; animation-delay: 1s; }
+    .particle:nth-child(3) { left: 60%; top: 40%; animation-delay: 2s; }
+    .particle:nth-child(4) { left: 80%; top: 60%; animation-delay: 3s; }
+    .particle:nth-child(5) { left: 40%; top: 10%; animation-delay: 4s; }
+    .particle:nth-child(6) { left: 90%; top: 30%; animation-delay: 5s; }
+
+    .showcase-content {
+      max-width: 1000px;
+      width: 100%;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .showcase-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(124, 58, 237, 0.2);
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      color: var(--accent-secondary);
+      margin-bottom: 1.5rem;
+      animation: bounceIn 0.8s ease-out;
+    }
+
+    .showcase-badge-icon {
+      animation: rotateIn 0.8s ease-out 0.3s backwards;
+    }
+
+    .showcase-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 3.5rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, #a855f7 50%, #7c3aed 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: slideUp 0.8s ease-out 0.2s backwards, gradientShift 4s ease infinite;
+    }
+
+    .showcase-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      animation: slideUp 0.8s ease-out 0.4s backwards;
+    }
+
+    .showcase-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: left;
+      transition: all 0.3s ease;
+      animation: scaleIn 0.6s ease-out backwards;
+    }
+
+    .feature-card:nth-child(1) { animation-delay: 0.5s; }
+    .feature-card:nth-child(2) { animation-delay: 0.7s; }
+    .feature-card:nth-child(3) { animation-delay: 0.9s; }
+    .feature-card:nth-child(4) { animation-delay: 1.1s; }
+    .feature-card:nth-child(5) { animation-delay: 1.3s; }
+    .feature-card:nth-child(6) { animation-delay: 1.5s; }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent-primary);
+      box-shadow: 0 20px 40px rgba(124, 58, 237, 0.2);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--gradient-1);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 8px 24px rgba(124, 58, 237, 0.3);
+    }
+
+    .feature-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.35rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .feature-tag {
+      display: inline-block;
+      background: rgba(124, 58, 237, 0.15);
+      color: var(--accent-tertiary);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 1rem;
+    }
+
+    .feature-tag.backend {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+    }
+
+    .feature-tag.ux {
+      background: rgba(251, 191, 36, 0.15);
+      color: var(--accent-gold);
+    }
+
+    .showcase-progress {
+      margin-bottom: 2rem;
+      animation: slideUp 0.8s ease-out 1.7s backwards;
+    }
+
+    .progress-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .progress-bar {
+      width: 300px;
+      height: 6px;
+      background: var(--bg-card);
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gradient-1);
+      border-radius: 3px;
+      animation: progressBar 3s ease-out forwards;
+    }
+
+    .showcase-cta {
+      animation: slideUp 0.8s ease-out 1.9s backwards;
+    }
+
+    .showcase-btn {
+      background: var(--gradient-1);
+      color: white;
+      border: none;
+      padding: 1.25rem 3rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      font-family: inherit;
+      border-radius: 16px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 10px 40px rgba(124, 58, 237, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .showcase-btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 20px 60px rgba(124, 58, 237, 0.5);
+    }
+
+    .showcase-btn-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .showcase-btn:hover .showcase-btn-arrow {
+      transform: translateX(4px);
+    }
+
+    .showcase-skip {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      padding: 0.5rem 1rem;
+      transition: color 0.2s ease;
+    }
+
+    .showcase-skip:hover {
+      color: var(--text-secondary);
+    }
+
+    .showcase-version {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      animation: slideUp 0.8s ease-out 2.1s backwards;
+    }
+
+    @media (max-width: 768px) {
+      .showcase-title {
+        font-size: 2.5rem;
+      }
+      .showcase-features {
+        grid-template-columns: 1fr;
+      }
+      .feature-card {
+        padding: 1.5rem;
+      }
+    }
+
+    /* ============ AUTH SCREENS ============ */
+    .auth-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .auth-bg-decoration {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: var(--gradient-1);
+      opacity: 0.1;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .auth-bg-decoration.top { top: -200px; right: -100px; }
+    .auth-bg-decoration.bottom { bottom: -200px; left: -100px; }
+
+    .auth-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 3rem;
+      width: 100%;
+      max-width: 440px;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .auth-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .auth-logo-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--gradient-1);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .auth-logo-text {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.75rem;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .auth-title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .auth-subtitle {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: inherit;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--gradient-1);
+      color: white;
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .btn-secondary {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-primary);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      padding: 0.5rem;
+    }
+
+    .btn-ghost:hover {
+      color: var(--accent-primary);
+    }
+
+    .btn-full { width: 100%; }
+
+    .btn-icon {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: 10px;
+    }
+
+    .auth-switch {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: var(--text-secondary);
+    }
+
+    .auth-switch a {
+      color: var(--accent-secondary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .auth-switch a:hover {
+      text-decoration: underline;
+    }
+
+    /* Password Rules */
+    .password-rules {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 0.75rem;
+    }
+
+    .password-rules-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .password-rule {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      padding: 0.25rem 0;
+    }
+
+    .password-rule.valid {
+      color: var(--success);
+    }
+
+    .password-rule-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    .password-rule.valid .password-rule-icon {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    /* Toast Notifications */
+    .toast-container {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .toast {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: var(--shadow-lg);
+      animation: slideIn 0.3s ease-out;
+      min-width: 300px;
+    }
+
+    .toast.success { border-left: 3px solid var(--success); }
+    .toast.error { border-left: 3px solid var(--error); }
+    .toast.info { border-left: 3px solid var(--accent-primary); }
+
+    .toast-icon {
+      font-size: 1.25rem;
+    }
+
+    .toast-message {
+      flex: 1;
+      font-size: 0.9rem;
+    }
+
+    /* ============ MAIN APP LAYOUT ============ */
+    .app-container {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      grid-template-rows: auto 1fr;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .app-header {
+      grid-column: 1 / -1;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .app-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .app-logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .app-logo-text {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.5rem;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.5rem 1rem;
+      width: 320px;
+      transition: all 0.2s ease;
+    }
+
+    .search-box:focus-within {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+    }
+
+    .search-box input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      margin-left: 0.5rem;
+    }
+
+    .search-box input:focus {
+      outline: none;
+    }
+
+    .search-box input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .user-menu:hover {
+      border-color: var(--accent-primary);
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      background: var(--gradient-1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    .user-info {
+      text-align: left;
+    }
+
+    .user-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .user-email {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Sidebar */
+    .app-sidebar {
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .compose-btn {
+      background: var(--gradient-1);
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-glow);
+      transition: all 0.2s ease;
+    }
+
+    .compose-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px rgba(124, 58, 237, 0.4);
+    }
+
+    .nav-section {
+      margin-bottom: 2rem;
+    }
+
+    .nav-section-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      padding: 0 0.75rem;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 0.25rem;
+    }
+
+    .nav-item:hover {
+      background: var(--bg-card);
+      color: var(--text-primary);
+    }
+
+    .nav-item.active {
+      background: var(--bg-card);
+      color: var(--accent-secondary);
+    }
+
+    .nav-item-icon {
+      font-size: 1.1rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .nav-item-label {
+      flex: 1;
+      font-size: 0.9rem;
+    }
+
+    .nav-item-badge {
+      background: var(--accent-primary);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      border-radius: 10px;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    /* Main Content */
+    .app-main {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .main-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-primary);
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .toolbar-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.5rem;
+    }
+
+    .toolbar-count {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Email List */
+    .email-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+
+    .email-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      animation: fadeIn 0.4s ease-out backwards;
+    }
+
+    .email-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-primary);
+      transform: translateX(4px);
+    }
+
+    .email-card.unread {
+      border-left: 3px solid var(--accent-primary);
+    }
+
+    .email-card.unread .email-subject {
+      font-weight: 600;
+    }
+
+    .email-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .email-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .email-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .email-sender {
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .email-label {
+      font-size: 0.65rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .email-label.inbox {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--success);
+    }
+
+    .email-label.sent {
+      background: rgba(124, 58, 237, 0.2);
+      color: var(--accent-secondary);
+    }
+
+    .email-time {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .email-actions {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .email-action-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.35rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+    }
+
+    .email-action-btn:hover {
+      background: var(--bg-secondary);
+      color: var(--accent-primary);
+    }
+
+    .email-action-btn.starred {
+      color: var(--accent-gold);
+    }
+
+    .email-subject {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .email-preview {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Email Detail View */
+    .email-detail {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2rem;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    .email-detail-header {
+      margin-bottom: 2rem;
+    }
+
+    .email-detail-subject {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+    }
+
+    .email-detail-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .email-detail-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+
+    .email-detail-info {
+      flex: 1;
+    }
+
+    .email-detail-sender {
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .email-detail-date {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .email-detail-body {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      font-size: 1rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    .email-detail-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    /* Compose Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      backdrop-filter: blur(4px);
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .modal-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.5rem;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.5rem;
+      padding: 0.25rem;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      color: var(--text-primary);
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .compose-field {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .compose-field-label {
+      width: 70px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .compose-field input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: inherit;
+    }
+
+    .compose-field input:focus {
+      outline: none;
+    }
+
+    .compose-body {
+      margin-top: 1rem;
+    }
+
+    .compose-body textarea {
+      width: 100%;
+      min-height: 200px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1rem;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    .compose-body textarea:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* AI Summarizer Modal */
+    .ai-modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 700px;
+      max-height: 85vh;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg), 0 0 60px rgba(124, 58, 237, 0.3);
+      animation: scaleIn 0.4s ease-out;
+    }
+
+    .ai-modal-header {
+      background: var(--gradient-1);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ai-modal-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: white;
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.5rem;
+    }
+
+    .ai-modal-title-icon {
+      font-size: 1.75rem;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    .ai-modal-close {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .ai-modal-close:hover {
+      background: rgba(255,255,255,0.3);
+      transform: rotate(90deg);
+    }
+
+    .ai-modal-body {
+      padding: 2rem;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+
+    .ai-prompt-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .ai-prompt-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .ai-prompt-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .ai-prompt-desc {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .ai-prompt-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .ai-loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+    }
+
+    .ai-loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid var(--border-color);
+      border-top-color: var(--accent-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1.5rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .ai-loading-text {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    .ai-loading-subtext {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .ai-summary-result {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .ai-summary-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .ai-summary-badge {
+      background: var(--gradient-1);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ai-summary-date {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .ai-summary-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.5rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    .ai-summary-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .ai-summary-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .ai-summary-section-title {
+      color: var(--accent-secondary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ai-summary-text {
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+
+    .ai-action-items {
+      list-style: none;
+    }
+
+    .ai-action-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      color: var(--text-primary);
+    }
+
+    .ai-action-item::before {
+      content: '→';
+      color: var(--accent-gold);
+      font-weight: bold;
+    }
+
+    .ai-modal-footer {
+      padding: 1rem 2rem;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ai-powered {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .ai-powered img {
+      height: 16px;
+    }
+
+    /* Summarize button in sidebar */
+    .summarize-btn {
+      background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      color: white;
+      border: none;
+      padding: 0.875rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .summarize-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    .summarize-btn-icon {
+      font-size: 1.1rem;
+    }
+
+    /* Empty State */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .empty-state-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .empty-state-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-state-desc {
+      color: var(--text-secondary);
+      max-width: 300px;
+    }
+
+    /* Loading Skeleton */
+    .skeleton {
+      background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-hover) 50%, var(--bg-card) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 8px;
+    }
+
+    .skeleton-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .skeleton-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+    }
+
+    .skeleton-line {
+      height: 14px;
+      margin-bottom: 0.5rem;
+    }
+
+    .skeleton-line.short { width: 40%; }
+    .skeleton-line.medium { width: 70%; }
+    .skeleton-line.long { width: 100%; }
+
+    /* Color utilities for avatars */
+    .bg-purple { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+    .bg-blue { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+    .bg-green { background: linear-gradient(135deg, #10b981, #34d399); }
+    .bg-orange { background: linear-gradient(135deg, #f97316, #fb923c); }
+    .bg-pink { background: linear-gradient(135deg, #ec4899, #f472b6); }
+    .bg-teal { background: linear-gradient(135deg, #14b8a6, #2dd4bf); }
+    .bg-red { background: linear-gradient(135deg, #ef4444, #f87171); }
+    .bg-indigo { background: linear-gradient(135deg, #6366f1, #818cf8); }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .app-container {
+        grid-template-columns: 1fr;
+      }
+      .app-sidebar {
+        display: none;
+      }
+      .search-box {
+        width: 200px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .app-header {
+        padding: 1rem;
+      }
+      .search-box {
+        display: none;
+      }
+      .user-info {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ============ FEATURE SHOWCASE SCREEN ============ -->
+  <div id="feature-showcase" class="feature-showcase hidden">
+    <div class="showcase-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    
+    <div class="showcase-content">
+      <div class="showcase-badge">
+        <span class="showcase-badge-icon">✨</span>
+        <span>Welcome to Ka-tch Mail v2.0</span>
+      </div>
+      
+      <h1 class="showcase-title">Discover What's New</h1>
+      <p class="showcase-subtitle">We've built something unique just for you. Here's what makes Ka-tch Mail special.</p>
+      
+      <div class="showcase-features">
+        <div class="feature-card">
+          <div class="feature-icon">🔐</div>
+          <h3 class="feature-title">Smart Password Validation</h3>
+          <p class="feature-desc">Real-time visual feedback as you type. Watch requirements turn green instantly - no guessing if your password is strong enough.</p>
+          <span class="feature-tag ux">UX Innovation</span>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3 class="feature-title">Live Email Counters</h3>
+          <p class="feature-desc">Custom API endpoint tracks unread, starred, and total emails in real-time. See your inbox status at a glance in the sidebar.</p>
+          <span class="feature-tag backend">Backend Bonus</span>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">⭐</div>
+          <h3 class="feature-title">Star & Organize</h3>
+          <p class="feature-desc">One-click starring with persistent storage. Your important emails stay marked even after server restart. Custom PUT endpoint powers this.</p>
+          <span class="feature-tag backend">Backend Bonus</span>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3 class="feature-title">Dynamic Avatars</h3>
+          <p class="feature-desc">Auto-generated colorful avatars from email addresses. Each sender gets a unique gradient - no generic placeholders here.</p>
+          <span class="feature-tag ux">UX Innovation</span>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">👤</div>
+          <h3 class="feature-title">User Profile API</h3>
+          <p class="feature-desc">New GET /auth/profile endpoint returns user details. Your name and email displayed beautifully in the header.</p>
+          <span class="feature-tag backend">Backend Bonus</span>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <h3 class="feature-title">Skeleton Loading States</h3>
+          <p class="feature-desc">Beautiful shimmer animations while data loads. Professional UX that shows attention to detail - no blank screens.</p>
+          <span class="feature-tag ux">UX Innovation</span>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3 class="feature-title">AI Email Summarizer</h3>
+          <p class="feature-desc">Powered by Google Gemini AI! One-click summary of all your emails with action items, key contacts, and smart insights.</p>
+          <span class="feature-tag" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">AI Feature</span>
+        </div>
+      </div>
+      
+      <div class="showcase-progress">
+        <div class="progress-label">Preparing your inbox...</div>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+      
+      <div class="showcase-cta">
+        <button class="showcase-btn" onclick="continueToInbox()">
+          <span>Continue to Inbox</span>
+          <span class="showcase-btn-arrow">→</span>
+        </button>
+        <br>
+        <button class="showcase-skip" onclick="skipShowcase()">Skip intro next time</button>
+      </div>
+    </div>
+    
+    <div class="showcase-version">
+      Ka-tch Mail v2.0 • Built with 💜 • 5 Bonus API Endpoints • AI Powered by Gemini
+    </div>
+  </div>
+
+  <!-- ============ AUTH: LOGIN SCREEN ============ -->
+  <div id="login-screen" class="auth-container">
+    <div class="auth-bg-decoration top"></div>
+    <div class="auth-bg-decoration bottom"></div>
+    
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="auth-logo-icon">✉️</div>
+        <span class="auth-logo-text">Ka-tch Mail</span>
+      </div>
+      
+      <h1 class="auth-title">Welcome back</h1>
+      <p class="auth-subtitle">Sign in to your digital postbox</p>
+      
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input type="text" id="login-username" class="form-input" placeholder="Enter your username" required>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="login-password" class="form-input" placeholder="Enter your password" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-full" id="login-btn">
+          <span>Sign In</span>
+          <span>→</span>
+        </button>
+      </form>
+      
+      <p class="auth-switch">
+        New to Ka-tch Mail? <a href="#" onclick="showRegister()">Create an account</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ============ AUTH: REGISTER SCREEN ============ -->
+  <div id="register-screen" class="auth-container hidden">
+    <div class="auth-bg-decoration top"></div>
+    <div class="auth-bg-decoration bottom"></div>
+    
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="auth-logo-icon">✉️</div>
+        <span class="auth-logo-text">Ka-tch Mail</span>
+      </div>
+      
+      <h1 class="auth-title">Create account</h1>
+      <p class="auth-subtitle">Join your new digital postbox</p>
+      
+      <form id="register-form" onsubmit="handleRegister(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" id="reg-first-name" class="form-input" placeholder="John" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" id="reg-last-name" class="form-input" placeholder="Doe" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input type="text" id="reg-username" class="form-input" placeholder="johndoe" required>
+          <small style="color: var(--text-muted); font-size: 0.8rem;">Your email will be: <span id="preview-email" style="color: var(--accent-secondary);">username@ka-tch.com</span></small>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Date of Birth</label>
+          <input type="date" id="reg-dob" class="form-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="reg-password" class="form-input" placeholder="Create a strong password" oninput="checkPasswordRules()" required>
+          <div class="password-rules" id="password-rules">
+            <div class="password-rules-title">Password Requirements</div>
+            <div class="password-rule" id="rule-upper">
+              <span class="password-rule-icon">✓</span>
+              <span>One uppercase letter</span>
+            </div>
+            <div class="password-rule" id="rule-lower">
+              <span class="password-rule-icon">✓</span>
+              <span>One lowercase letter</span>
+            </div>
+            <div class="password-rule" id="rule-number">
+              <span class="password-rule-icon">✓</span>
+              <span>One number</span>
+            </div>
+            <div class="password-rule" id="rule-special">
+              <span class="password-rule-icon">✓</span>
+              <span>One special symbol</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Confirm Password</label>
+          <input type="password" id="reg-confirm-password" class="form-input" placeholder="Confirm your password" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-full">
+          <span>Create Account</span>
+          <span>→</span>
+        </button>
+      </form>
+      
+      <p class="auth-switch">
+        Already have an account? <a href="#" onclick="showLogin()">Sign in</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ============ MAIN APP ============ -->
+  <div id="app-screen" class="app-container hidden">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="app-logo">
+          <div class="app-logo-icon">✉️</div>
+          <span class="app-logo-text">Ka-tch Mail</span>
+        </div>
+        <div class="search-box">
+          <span>🔍</span>
+          <input type="text" placeholder="Search emails..." id="search-input" oninput="filterEmails()">
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="btn btn-icon btn-secondary" onclick="refreshInbox()" title="Refresh">🔄</button>
+        <div class="user-menu" onclick="handleLogout()">
+          <div class="user-avatar" id="user-avatar">U</div>
+          <div class="user-info">
+            <div class="user-name" id="user-name">User</div>
+            <div class="user-email" id="user-email">user@ka-tch.com</div>
+          </div>
+          <span style="color: var(--text-muted);">⏻</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="app-sidebar">
+      <button class="compose-btn" onclick="openCompose()">
+        <span>✏️</span>
+        <span>Compose</span>
+      </button>
+      
+      <button class="summarize-btn" onclick="openAISummary()">
+        <span class="summarize-btn-icon">🤖</span>
+        <span>AI Summarize</span>
+      </button>
+      
+      <nav class="nav-section">
+        <div class="nav-section-title">Mailbox</div>
+        <div class="nav-item active" data-filter="inbox" onclick="setFilter('inbox')">
+          <span class="nav-item-icon">📥</span>
+          <span class="nav-item-label">Inbox</span>
+          <span class="nav-item-badge" id="unread-badge">0</span>
+        </div>
+        <div class="nav-item" data-filter="starred" onclick="setFilter('starred')">
+          <span class="nav-item-icon">⭐</span>
+          <span class="nav-item-label">Starred</span>
+          <span class="nav-item-badge" id="starred-badge" style="background: var(--accent-gold);">0</span>
+        </div>
+        <div class="nav-item" data-filter="sent" onclick="setFilter('sent')">
+          <span class="nav-item-icon">📤</span>
+          <span class="nav-item-label">Sent</span>
+        </div>
+        <div class="nav-item" data-filter="all" onclick="setFilter('all')">
+          <span class="nav-item-icon">📬</span>
+          <span class="nav-item-label">All Mail</span>
+        </div>
+      </nav>
+      
+      <nav class="nav-section" style="margin-top: auto;">
+        <div class="nav-item" onclick="handleLogout()">
+          <span class="nav-item-icon">🚪</span>
+          <span class="nav-item-label">Sign Out</span>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <div class="main-toolbar">
+        <div class="toolbar-left">
+          <h2 class="toolbar-title" id="toolbar-title">Inbox</h2>
+          <span class="toolbar-count" id="toolbar-count">0 emails</span>
+        </div>
+        <div class="toolbar-right">
+          <button class="btn btn-secondary btn-icon" onclick="refreshInbox()" title="Refresh">↻</button>
+        </div>
+      </div>
+      
+      <!-- Email List View -->
+      <div class="email-list" id="email-list">
+        <!-- Loading skeleton -->
+        <div class="skeleton-card" id="loading-skeleton">
+          <div style="display: flex; gap: 1rem; margin-bottom: 0.75rem;">
+            <div class="skeleton skeleton-avatar"></div>
+            <div style="flex: 1;">
+              <div class="skeleton skeleton-line short"></div>
+              <div class="skeleton skeleton-line medium"></div>
+            </div>
+          </div>
+          <div class="skeleton skeleton-line long"></div>
+          <div class="skeleton skeleton-line medium"></div>
+        </div>
+      </div>
+
+      <!-- Email Detail View -->
+      <div class="email-detail hidden" id="email-detail">
+        <!-- Content will be injected -->
+      </div>
+    </main>
+  </div>
+
+  <!-- ============ AI SUMMARIZER MODAL ============ -->
+  <div class="modal-overlay hidden" id="ai-modal">
+    <div class="ai-modal">
+      <div class="ai-modal-header">
+        <div class="ai-modal-title">
+          <span class="ai-modal-title-icon">🤖</span>
+          <span>AI Email Summarizer</span>
+        </div>
+        <button class="ai-modal-close" onclick="closeAISummary()">×</button>
+      </div>
+      
+      <div class="ai-modal-body" id="ai-modal-body">
+        <!-- Initial prompt state -->
+        <div class="ai-prompt-card" id="ai-prompt">
+          <div class="ai-prompt-icon">✨</div>
+          <h3 class="ai-prompt-title">Summarize Today's Emails</h3>
+          <p class="ai-prompt-desc">
+            Let AI analyze your inbox and create a smart summary with key insights, action items, and important highlights.
+          </p>
+          <div class="ai-prompt-actions">
+            <button class="btn btn-secondary" onclick="closeAISummary()">Maybe Later</button>
+            <button class="btn btn-primary" onclick="generateAISummary()">
+              <span>✨</span>
+              <span>Generate Summary</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Loading state -->
+        <div class="ai-loading hidden" id="ai-loading">
+          <div class="ai-loading-spinner"></div>
+          <div class="ai-loading-text">Analyzing your emails...</div>
+          <div class="ai-loading-subtext">Powered by Google Gemini AI</div>
+        </div>
+        
+        <!-- Summary result -->
+        <div class="ai-summary-result hidden" id="ai-result">
+          <div class="ai-summary-header">
+            <span class="ai-summary-badge">
+              <span>🤖</span>
+              <span>AI Generated</span>
+            </span>
+            <span class="ai-summary-date" id="ai-summary-date"></span>
+          </div>
+          <div class="ai-summary-content" id="ai-summary-content">
+            <!-- Summary will be injected here -->
+          </div>
+        </div>
+      </div>
+      
+      <div class="ai-modal-footer">
+        <div class="ai-powered">
+          <span>⚡</span>
+          <span>Powered by Google Gemini AI</span>
+        </div>
+        <button class="btn btn-secondary" onclick="closeAISummary()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ COMPOSE MODAL ============ -->
+  <div class="modal-overlay hidden" id="compose-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">New Message</h3>
+        <button class="modal-close" onclick="closeCompose()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="compose-field">
+          <span class="compose-field-label">To</span>
+          <input type="email" id="compose-to" placeholder="recipient@example.com">
+        </div>
+        <div class="compose-field">
+          <span class="compose-field-label">Subject</span>
+          <input type="text" id="compose-subject" placeholder="Subject">
+        </div>
+        <div class="compose-body">
+          <textarea id="compose-body" placeholder="Write your message..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeCompose()">Discard</button>
+        <button class="btn btn-primary" onclick="sendEmail()">
+          <span>Send</span>
+          <span>✈️</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ============ CONFIGURATION ============
+    const API_URL = 'http://localhost:8080';
+    
+    // ============ STATE ============
+    let currentUser = null;
+    let emails = [];
+    let currentFilter = 'inbox';
+    let selectedEmail = null;
+
+    // Avatar colors
+    const avatarColors = ['bg-purple', 'bg-blue', 'bg-green', 'bg-orange', 'bg-pink', 'bg-teal', 'bg-red', 'bg-indigo'];
+    
+    function getAvatarColor(str) {
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      return avatarColors[Math.abs(hash) % avatarColors.length];
+    }
+
+    function getInitials(email) {
+      const name = email.split('@')[0];
+      return name.substring(0, 2).toUpperCase();
+    }
+
+    // ============ TOAST NOTIFICATIONS ============
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      
+      const icons = { success: '✓', error: '✕', info: 'ℹ' };
+      toast.innerHTML = `
+        <span class="toast-icon">${icons[type]}</span>
+        <span class="toast-message">${escapeHtml(message)}</span>
+      `;
+      
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(20px)';
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+    // ============ UTILITY FUNCTIONS ============
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const date = new Date(dateStr);
+      const now = new Date();
+      const diff = now - date;
+      
+      if (diff < 86400000 && date.getDate() === now.getDate()) {
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      } else if (diff < 604800000) {
+        return date.toLocaleDateString([], { weekday: 'short' });
+      } else {
+        return date.toLocaleDateString([], { month: 'short', day: 'numeric' });
+      }
+    }
+
+    function formatFullDate(dateStr) {
+      if (!dateStr) return '';
+      const date = new Date(dateStr);
+      return date.toLocaleDateString([], { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    // ============ SCREEN NAVIGATION ============
+    let skipShowcaseFlag = localStorage.getItem('skipShowcase') === 'true';
+    
+    function showLogin() {
+      document.getElementById('login-screen').classList.remove('hidden');
+      document.getElementById('register-screen').classList.add('hidden');
+      document.getElementById('feature-showcase').classList.add('hidden');
+      document.getElementById('app-screen').classList.add('hidden');
+    }
+
+    function showRegister() {
+      document.getElementById('login-screen').classList.add('hidden');
+      document.getElementById('register-screen').classList.remove('hidden');
+      document.getElementById('feature-showcase').classList.add('hidden');
+      document.getElementById('app-screen').classList.add('hidden');
+    }
+
+    function showFeatureShowcase() {
+      document.getElementById('login-screen').classList.add('hidden');
+      document.getElementById('register-screen').classList.add('hidden');
+      document.getElementById('feature-showcase').classList.remove('hidden');
+      document.getElementById('app-screen').classList.add('hidden');
+    }
+
+    function showApp() {
+      document.getElementById('login-screen').classList.add('hidden');
+      document.getElementById('register-screen').classList.add('hidden');
+      document.getElementById('feature-showcase').classList.add('hidden');
+      document.getElementById('app-screen').classList.remove('hidden');
+    }
+
+    function continueToInbox() {
+      showApp();
+      refreshInbox();
+    }
+
+    function skipShowcase() {
+      localStorage.setItem('skipShowcase', 'true');
+      skipShowcaseFlag = true;
+      showToast('Feature intro disabled. You can clear browser data to see it again.', 'info');
+      continueToInbox();
+    }
+
+    // ============ PASSWORD VALIDATION ============
+    function checkPasswordRules() {
+      const password = document.getElementById('reg-password').value;
+      
+      const rules = {
+        upper: /[A-Z]/.test(password),
+        lower: /[a-z]/.test(password),
+        number: /\d/.test(password),
+        special: /[^\w\s]/.test(password)
+      };
+
+      Object.keys(rules).forEach(rule => {
+        const el = document.getElementById(`rule-${rule}`);
+        if (rules[rule]) {
+          el.classList.add('valid');
+        } else {
+          el.classList.remove('valid');
+        }
+      });
+    }
+
+    // ============ EMAIL PREVIEW ============
+    document.addEventListener('DOMContentLoaded', () => {
+      const usernameInput = document.getElementById('reg-username');
+      if (usernameInput) {
+        usernameInput.addEventListener('input', (e) => {
+          const preview = document.getElementById('preview-email');
+          preview.textContent = (e.target.value || 'username') + '@ka-tch.com';
+        });
+      }
+      
+      // Check auth status on load
+      checkAuthStatus();
+    });
+
+    // ============ AUTH FUNCTIONS ============
+    async function checkAuthStatus() {
+      try {
+        const res = await fetch(`${API_URL}/auth/status`, { credentials: 'include' });
+        const data = await res.json();
+        
+        if (data.status === 'authenticated') {
+          currentUser = data.user;
+          await loadUserProfile();
+          // Already logged in users go straight to app
+          showApp();
+          await refreshInbox();
+        } else {
+          showLogin();
+        }
+      } catch (err) {
+        console.error('Auth check failed:', err);
+        showLogin();
+      }
+    }
+
+    async function loadUserProfile() {
+      try {
+        const res = await fetch(`${API_URL}/auth/profile`, { credentials: 'include' });
+        if (res.ok) {
+          const profile = await res.json();
+          document.getElementById('user-name').textContent = `${profile.first_name} ${profile.last_name}`;
+          document.getElementById('user-email').textContent = profile.email;
+          document.getElementById('user-avatar').textContent = profile.first_name[0] + profile.last_name[0];
+        }
+      } catch (err) {
+        console.log('Profile load failed, using defaults');
+      }
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+      
+      try {
+        const res = await fetch(`${API_URL}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ username, password })
+        });
+        
+        const data = await res.json();
+        
+        if (res.ok) {
+          currentUser = username;
+          showToast('Welcome back! 🎉', 'success');
+          await loadUserProfile();
+          
+          // Show feature showcase or go directly to app
+          if (skipShowcaseFlag) {
+            showApp();
+            await refreshInbox();
+          } else {
+            showFeatureShowcase();
+          }
+        } else {
+          showToast(data.error || 'Login failed', 'error');
+        }
+      } catch (err) {
+        showToast('Connection error. Is the server running?', 'error');
+      }
+    }
+
+    async function handleRegister(e) {
+      e.preventDefault();
+      
+      const data = {
+        username: document.getElementById('reg-username').value,
+        password: document.getElementById('reg-password').value,
+        confirm_password: document.getElementById('reg-confirm-password').value,
+        first_name: document.getElementById('reg-first-name').value,
+        last_name: document.getElementById('reg-last-name').value,
+        dob: document.getElementById('reg-dob').value,
+        email: 'dummy@ka-tch.com'
+      };
+      
+      try {
+        const res = await fetch(`${API_URL}/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify(data)
+        });
+        
+        const result = await res.json();
+        
+        if (res.ok) {
+          showToast(`Account created! Your email is ${result.email}`, 'success');
+          showLogin();
+          document.getElementById('login-username').value = data.username;
+        } else {
+          showToast(result.error || 'Registration failed', 'error');
+        }
+      } catch (err) {
+        showToast('Connection error. Is the server running?', 'error');
+      }
+    }
+
+    async function handleLogout() {
+      try {
+        await fetch(`${API_URL}/auth/logout`, {
+          method: 'POST',
+          credentials: 'include'
+        });
+        
+        currentUser = null;
+        emails = [];
+        showToast('Signed out successfully', 'info');
+        showLogin();
+      } catch (err) {
+        showToast('Logout failed', 'error');
+      }
+    }
+
+    // ============ INBOX FUNCTIONS ============
+    async function refreshInbox() {
+      const emailList = document.getElementById('email-list');
+      emailList.innerHTML = `
+        <div class="skeleton-card">
+          <div style="display: flex; gap: 1rem; margin-bottom: 0.75rem;">
+            <div class="skeleton skeleton-avatar"></div>
+            <div style="flex: 1;">
+              <div class="skeleton skeleton-line short"></div>
+              <div class="skeleton skeleton-line medium"></div>
+            </div>
+          </div>
+          <div class="skeleton skeleton-line long"></div>
+        </div>
+      `.repeat(3);
+      
+      try {
+        const res = await fetch(`${API_URL}/mail/inbox`, { credentials: 'include' });
+        
+        if (res.ok) {
+          emails = await res.json();
+          renderEmails();
+          await updateCounts();
+        } else {
+          showToast('Failed to load inbox', 'error');
+        }
+      } catch (err) {
+        showToast('Connection error. Is the server running?', 'error');
+        emailList.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">🔌</div>
+            <h3 class="empty-state-title">Connection Error</h3>
+            <p class="empty-state-desc">Unable to connect to the server. Make sure the backend is running on port 8080.</p>
+          </div>
+        `;
+      }
+    }
+
+    async function updateCounts() {
+      try {
+        const res = await fetch(`${API_URL}/mail/inbox/count`, { credentials: 'include' });
+        if (res.ok) {
+          const counts = await res.json();
+          document.getElementById('unread-badge').textContent = counts.unread;
+          document.getElementById('starred-badge').textContent = counts.starred;
+        }
+      } catch (err) {
+        console.log('Count update failed');
+      }
+    }
+
+    function filterEmails() {
+      renderEmails();
+    }
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      
+      // Update nav items
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+        if (item.dataset.filter === filter) {
+          item.classList.add('active');
+        }
+      });
+      
+      // Update title
+      const titles = { inbox: 'Inbox', sent: 'Sent', starred: 'Starred', all: 'All Mail' };
+      document.getElementById('toolbar-title').textContent = titles[filter] || 'Inbox';
+      
+      // Hide detail view
+      document.getElementById('email-detail').classList.add('hidden');
+      document.getElementById('email-list').classList.remove('hidden');
+      
+      renderEmails();
+    }
+
+    function renderEmails() {
+      const emailList = document.getElementById('email-list');
+      const searchQuery = document.getElementById('search-input').value.toLowerCase();
+      
+      let filtered = emails;
+      
+      // Apply filter
+      if (currentFilter === 'inbox') {
+        filtered = emails.filter(e => e.label === 'inbox');
+      } else if (currentFilter === 'sent') {
+        filtered = emails.filter(e => e.label === 'sent');
+      } else if (currentFilter === 'starred') {
+        filtered = emails.filter(e => e.starred);
+      }
+      
+      // Apply search
+      if (searchQuery) {
+        filtered = filtered.filter(e => 
+          e.subject.toLowerCase().includes(searchQuery) ||
+          e.body.toLowerCase().includes(searchQuery) ||
+          e.from.toLowerCase().includes(searchQuery)
+        );
+      }
+      
+      // Update count
+      document.getElementById('toolbar-count').textContent = `${filtered.length} email${filtered.length !== 1 ? 's' : ''}`;
+      
+      if (filtered.length === 0) {
+        emailList.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">📭</div>
+            <h3 class="empty-state-title">No emails here</h3>
+            <p class="empty-state-desc">When you receive emails, they'll show up here.</p>
+          </div>
+        `;
+        return;
+      }
+      
+      emailList.innerHTML = filtered.map((email, index) => `
+        <div class="email-card ${!email.read ? 'unread' : ''}" 
+             onclick="viewEmail(${email.id})"
+             style="animation-delay: ${index * 0.05}s">
+          <div class="email-header">
+            <div class="email-avatar ${getAvatarColor(email.from)}">
+              ${getInitials(email.from)}
+            </div>
+            <div class="email-meta">
+              <div class="email-sender">
+                ${escapeHtml(email.from.split('@')[0])}
+                <span class="email-label ${email.label}">${email.label}</span>
+              </div>
+              <div class="email-time">${formatDate(email.timestamp)}</div>
+            </div>
+            <div class="email-actions">
+              <button class="email-action-btn ${email.starred ? 'starred' : ''}" 
+                      onclick="event.stopPropagation(); toggleStar(${email.id})" 
+                      title="Star">
+                ${email.starred ? '★' : '☆'}
+              </button>
+              <button class="email-action-btn" 
+                      onclick="event.stopPropagation(); deleteEmail(${email.id})" 
+                      title="Delete">
+                🗑️
+              </button>
+            </div>
+          </div>
+          <div class="email-subject">${escapeHtml(email.subject || '(No Subject)')}</div>
+          <div class="email-preview">${escapeHtml(email.body || 'No content')}</div>
+        </div>
+      `).join('');
+    }
+
+    async function viewEmail(id) {
+      const email = emails.find(e => e.id === id);
+      if (!email) return;
+      
+      selectedEmail = email;
+      
+      // Mark as read
+      if (!email.read) {
+        try {
+          await fetch(`${API_URL}/mail/inbox/${id}/read`, {
+            method: 'PUT',
+            credentials: 'include'
+          });
+          email.read = true;
+          await updateCounts();
+        } catch (err) {
+          console.log('Failed to mark as read');
+        }
+      }
+      
+      const detailView = document.getElementById('email-detail');
+      detailView.innerHTML = `
+        <button class="btn btn-secondary" onclick="backToList()" style="margin-bottom: 1.5rem;">
+          ← Back to list
+        </button>
+        
+        <div class="email-detail-header">
+          <h1 class="email-detail-subject">${escapeHtml(email.subject || '(No Subject)')}</h1>
+          
+          <div class="email-detail-meta">
+            <div class="email-detail-avatar ${getAvatarColor(email.from)}">
+              ${getInitials(email.from)}
+            </div>
+            <div class="email-detail-info">
+              <div class="email-detail-sender">${escapeHtml(email.from)}</div>
+              <div class="email-detail-date">${formatFullDate(email.timestamp)}</div>
+            </div>
+            <span class="email-label ${email.label}" style="font-size: 0.75rem;">${email.label}</span>
+          </div>
+        </div>
+        
+        <div class="email-detail-body">${escapeHtml(email.body || 'No content')}</div>
+        
+        <div class="email-detail-actions">
+          <button class="btn btn-primary" onclick="replyToEmail('${escapeHtml(email.from)}')">
+            <span>Reply</span>
+            <span>↩️</span>
+          </button>
+          <button class="btn btn-secondary ${email.starred ? 'starred' : ''}" onclick="toggleStar(${email.id})">
+            <span>${email.starred ? '★ Starred' : '☆ Star'}</span>
+          </button>
+          <button class="btn btn-secondary" onclick="deleteEmail(${email.id})">
+            <span>🗑️ Delete</span>
+          </button>
+        </div>
+      `;
+      
+      document.getElementById('email-list').classList.add('hidden');
+      detailView.classList.remove('hidden');
+    }
+
+    function backToList() {
+      document.getElementById('email-detail').classList.add('hidden');
+      document.getElementById('email-list').classList.remove('hidden');
+      renderEmails();
+    }
+
+    async function toggleStar(id) {
+      try {
+        const res = await fetch(`${API_URL}/mail/inbox/${id}/star`, {
+          method: 'PUT',
+          credentials: 'include'
+        });
+        
+        if (res.ok) {
+          const email = emails.find(e => e.id === id);
+          if (email) {
+            email.starred = !email.starred;
+            renderEmails();
+            await updateCounts();
+            
+            if (selectedEmail && selectedEmail.id === id) {
+              viewEmail(id);
+            }
+          }
+        }
+      } catch (err) {
+        showToast('Failed to update star', 'error');
+      }
+    }
+
+    async function deleteEmail(id) {
+      if (!confirm('Delete this email?')) return;
+      
+      try {
+        const res = await fetch(`${API_URL}/mail/inbox/${id}`, {
+          method: 'DELETE',
+          credentials: 'include'
+        });
+        
+        if (res.ok) {
+          emails = emails.filter(e => e.id !== id);
+          showToast('Email deleted', 'success');
+          
+          if (selectedEmail && selectedEmail.id === id) {
+            backToList();
+          } else {
+            renderEmails();
+          }
+          await updateCounts();
+        }
+      } catch (err) {
+        showToast('Failed to delete email', 'error');
+      }
+    }
+
+    // ============ COMPOSE FUNCTIONS ============
+    function openCompose() {
+      document.getElementById('compose-modal').classList.remove('hidden');
+      document.getElementById('compose-to').value = '';
+      document.getElementById('compose-subject').value = '';
+      document.getElementById('compose-body').value = '';
+      document.getElementById('compose-to').focus();
+    }
+
+    function closeCompose() {
+      document.getElementById('compose-modal').classList.add('hidden');
+    }
+
+    function replyToEmail(to) {
+      openCompose();
+      document.getElementById('compose-to').value = to;
+      document.getElementById('compose-subject').value = `Re: ${selectedEmail?.subject || ''}`;
+      document.getElementById('compose-body').focus();
+    }
+
+    async function sendEmail() {
+      const to = document.getElementById('compose-to').value;
+      const subject = document.getElementById('compose-subject').value;
+      const body = document.getElementById('compose-body').value;
+      
+      if (!to) {
+        showToast('Please enter a recipient', 'error');
+        return;
+      }
+      
+      try {
+        const res = await fetch(`${API_URL}/mail/send`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ to, subject, body })
+        });
+        
+        const data = await res.json();
+        
+        if (res.ok) {
+          showToast('Email sent! ✈️', 'success');
+          closeCompose();
+          await refreshInbox();
+        } else {
+          showToast(data.error || 'Failed to send', 'error');
+        }
+      } catch (err) {
+        showToast('Connection error', 'error');
+      }
+    }
+
+    // Close modal on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeCompose();
+        closeAISummary();
+      }
+    });
+
+    // ============ AI SUMMARIZER FUNCTIONS ============
+    // Note: In production, API key should be stored securely on backend
+    const GEMINI_API_KEY = 'AIzaSyDyK9Jyhz9NqsTahNfFcIX5iXazPjqTk0w';
+    const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+
+    function openAISummary() {
+      document.getElementById('ai-modal').classList.remove('hidden');
+      document.getElementById('ai-prompt').classList.remove('hidden');
+      document.getElementById('ai-loading').classList.add('hidden');
+      document.getElementById('ai-result').classList.add('hidden');
+    }
+
+    function closeAISummary() {
+      document.getElementById('ai-modal').classList.add('hidden');
+    }
+
+    async function generateAISummary() {
+      // Show loading state
+      document.getElementById('ai-prompt').classList.add('hidden');
+      document.getElementById('ai-loading').classList.remove('hidden');
+      document.getElementById('ai-result').classList.add('hidden');
+
+      try {
+        // Prepare email data for summarization
+        const emailData = emails.map(e => ({
+          from: e.from,
+          subject: e.subject,
+          body: e.body,
+          label: e.label,
+          read: e.read,
+          starred: e.starred
+        }));
+
+        const prompt = `You are an AI email assistant. Analyze the following emails and provide a comprehensive summary in a structured format.
+
+EMAILS DATA:
+${JSON.stringify(emailData, null, 2)}
+
+Please provide a summary with the following sections:
+
+📊 OVERVIEW
+Provide a brief overview of the inbox status (total emails, unread count, key statistics).
+
+🔥 KEY HIGHLIGHTS
+List the most important or urgent emails that need attention.
+
+📋 ACTION ITEMS
+Extract any action items or tasks mentioned in the emails.
+
+👥 KEY CONTACTS
+List the main people who have emailed and brief context about their messages.
+
+💡 INSIGHTS
+Any patterns or insights you notice from the emails.
+
+Format your response in a clean, readable way. Use bullet points where appropriate. Keep it concise but informative.`;
+
+        const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{
+                text: prompt
+              }]
+            }],
+            generationConfig: {
+              temperature: 0.7,
+              maxOutputTokens: 2048,
+            }
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to generate summary');
+        }
+
+        const data = await response.json();
+        const summaryText = data.candidates[0].content.parts[0].text;
+
+        // Display result
+        displayAISummary(summaryText);
+
+      } catch (error) {
+        console.error('AI Summary error:', error);
+        showToast('Failed to generate AI summary. Please try again.', 'error');
+        
+        // Show prompt again on error
+        document.getElementById('ai-prompt').classList.remove('hidden');
+        document.getElementById('ai-loading').classList.add('hidden');
+      }
+    }
+
+    function displayAISummary(summaryText) {
+      document.getElementById('ai-loading').classList.add('hidden');
+      document.getElementById('ai-result').classList.remove('hidden');
+
+      // Format the date
+      const now = new Date();
+      document.getElementById('ai-summary-date').textContent = 
+        now.toLocaleDateString('en-US', { 
+          weekday: 'long', 
+          year: 'numeric', 
+          month: 'long', 
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+      // Format the summary with HTML
+      const formattedSummary = formatAISummary(summaryText);
+      document.getElementById('ai-summary-content').innerHTML = formattedSummary;
+
+      showToast('AI summary generated successfully! ✨', 'success');
+    }
+
+    function formatAISummary(text) {
+      // Convert markdown-like formatting to HTML
+      let formatted = escapeHtml(text);
+      
+      // Convert section headers (emoji + text)
+      formatted = formatted.replace(/([📊🔥📋👥💡⭐🎯📌✅❌⚠️]) ([A-Z\s]+)/g, 
+        '<div class="ai-summary-section"><div class="ai-summary-section-title">$1 $2</div><div class="ai-summary-text">');
+      
+      // Convert bullet points
+      formatted = formatted.replace(/^[•\-\*]\s+(.+)$/gm, '<div class="ai-action-item">$1</div>');
+      formatted = formatted.replace(/^\d+\.\s+(.+)$/gm, '<div class="ai-action-item">$1</div>');
+      
+      // Add line breaks
+      formatted = formatted.replace(/\n\n/g, '</div></div>');
+      formatted = formatted.replace(/\n/g, '<br>');
+      
+      // Bold text
+      formatted = formatted.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      
+      return `<div class="ai-summary-section"><div class="ai-summary-text">${formatted}</div></div>`;
+    }
+  </script>
+</body>
+</html>
